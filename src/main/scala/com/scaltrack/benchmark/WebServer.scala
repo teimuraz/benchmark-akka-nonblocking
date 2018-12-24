@@ -44,7 +44,7 @@ object WebServer {
         }
       }
 
-    val bindingFuture = Http().bindAndHandle(route, "localhost", 9000)
+    val bindingFuture = Http().bindAndHandle(route, "3.17.161.135", 9000)
 
     println(s"Server online at http://localhost:9001/\nPress RETURN to stop...")
     StdIn.readLine() // let it run until user presses return
