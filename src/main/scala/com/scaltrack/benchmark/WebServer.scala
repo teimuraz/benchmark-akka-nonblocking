@@ -18,7 +18,7 @@ object WebServer {
   def makeRequests(implicit sys: ActorSystem, mat: ActorMaterializer, ec: ExecutionContext): Future[String] = {
 
     val futures = (1 to 10).map( _ =>
-      Http().singleRequest(HttpRequest(uri = s"http://3.17.161.135:9000/hello?p=${rand.nextInt(99999) + 1}")).map(response => response.toString())
+      Http().singleRequest(HttpRequest(uri = s"http://3.17.161.135:9001/hello?p=${rand.nextInt(99999) + 1}")).map(response => response.toString())
     )
 
     Future.sequence(futures).map( _ => "Done")
@@ -44,9 +44,9 @@ object WebServer {
         }
       }
 
-    val bindingFuture = Http().bindAndHandle(route, "localhost", 9000)
+    val bindingFuture = Http().bindAndHandle(route, "localhost", 9001)
 
-    println(s"Server online at http://localhost:9000/\nPress RETURN to stop...")
+    println(s"Server online at http://localhost:9001/\nPress RETURN to stop...")
     StdIn.readLine() // let it run until user presses return
     bindingFuture
       .flatMap(_.unbind()) // trigger unbinding from the port
