@@ -18,7 +18,8 @@ object WebServer {
   def makeRequests(implicit sys: ActorSystem, mat: ActorMaterializer, ec: ExecutionContext): Future[String] = {
 
     val futures = (1 to 10).map( _ =>
-      Http().singleRequest(HttpRequest(uri = s"http://3.17.161.135:9001/hello?p=${rand.nextInt(99999) + 1}")).map(response => response.toString())
+      Http().singleRequest(HttpRequest(uri = s"https://akka.io")).map(response => response.toString())
+//        Http().singleRequest(HttpRequest(uri = s"http://3.17.161.135:9001/hello?p=${rand.nextInt(99999) + 1}")).map(response => response.toString())
     )
 
     Future.sequence(futures).map( _ => "Done")
